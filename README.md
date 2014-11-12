@@ -3,4 +3,4 @@ sentence-builder
 
 Ruby Gem
 
-* in development *
+- in development 
