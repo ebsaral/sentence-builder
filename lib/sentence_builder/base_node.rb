@@ -1,4 +1,4 @@
-module Builder
+module SentenceBuilder
   class BaseNode
     attr_reader :name, :default
 
@@ -9,7 +9,7 @@ module Builder
     end
 
     def is_block?
-      self.is_a?(Filters::BlockNode) ? true : false
+      self.is_a?(BlockNode) ? true : false
     end
 
     def structure

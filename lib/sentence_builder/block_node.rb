@@ -5,17 +5,18 @@
 # with this class when we group Node1 and Node 2 then it will not create Sci-fi movies upcoming movies, it will create
 # as  Sci-fi upcoming movies
 
-module Builder
+
+module SentenceBuilder
 
   BLOCK = :block_node
   BLOCK_TYPE_PREFIX = 1
   BLOCK_TYPE_SUFFIX = 2
 
-  class BlockNode < BaseNode
+  class BlockNode < SentenceBuilder::BaseNode
     attr_reader :name, :default, :links
 
     def initialize(type, options = {})
-      super(Filters::BLOCK, options)
+      super(BLOCK, options)
       @type = type  # BLOCK_TYPE_PREFIX or BLOCK_TYPE_SUFFIX
       @content = options[:content] || ''
       @links = []

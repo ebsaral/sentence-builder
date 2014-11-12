@@ -1,4 +1,5 @@
-module Builder
+module SentenceBuilder
+
   class SentenceNode < BaseNode
     attr_reader :name, :sort_by_value
 

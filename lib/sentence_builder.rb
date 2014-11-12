@@ -1,5 +1,5 @@
-module Builder
-  class SentenceBuilder
+module SentenceBuilder
+  class Builder
 
     def initialize(nodes = [], blocks = [], sorted = true)
       @nodes = nodes.select{|b| b.is_a?(SentenceNode)}
