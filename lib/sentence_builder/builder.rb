@@ -1,86 +1,67 @@
 require 'active_support/core_ext/string'
-require 'sentence_builder/block_node'
 require 'sentence_builder/sentence_node'
 
 module SentenceBuilder
   class Builder
 
-    def initialize(nodes = [], blocks = [], sorted = true)
+    def initialize(nodes = [])
       @nodes = nodes.select{|b| b.is_a?(SentenceNode)}
-      @blocks = blocks.select{|b| b.is_a?(BlockNode)}
-      @sorted = sorted
-    end
-
-    # Returns the string representation of nodes and blocks by updating with given parameters
-    def get_sentence(params = {}, enhance = true, separator = ' ')
-      hash = (enhance ? enhance_content(params) : params)
-      build_sentence_from_params(params).join(separator) % hash
     end
 
     # Return all nodes in order as an hash
-    def get_hash(params = {})
-      get_nodes.map{|n| n.to_hash(params[n.name])}
+    def get_hash(params = {}, sorted = true)
+      get_nodes(sorted).map{|n| n.to_hash(params[n.name])}
+    end
+
+    # Returns the string representation of nodes and blocks by updating with given parameters
+    def get_sentence(params = {}, sorted = true, separator = ' ')
+      build_sentence_from_hash(get_hash(params, sorted)).select(&:present?).join(separator)
     end
 
     private
-    def get_node_by_name(name)
-      nodes.select{|n| n.name == name}.first
-    end
-
-    def enhance_content(params)
+    # Combines array values of each element in params hash into a string with given separator
+    def enhance_content(params, separator = ', ')
       params.each do |k, v|
         params[k] = if v.is_a?(Array)
-                      v.join(', ')
+                      v.join(separator)
                     else
-                      params[k] = v.to_s
+                      params[k] = v
                     end
       end
     end
 
-    def add_node(node)
-      @nodes << node
+    # Return nodes by sorting option
+    def get_nodes(sorted = true)
+      to_boolean(sorted) ? @nodes.sort_by{|i| i.sort_by_value} : @nodes
     end
 
-    def get_nodes
-      if @sorted
-        @nodes.sort_by{|i| i.sort_by_value}
-      else
-        @nodes
-      end
-    end
-
-    def combine_nodes
-      result = Array.new(get_nodes)
-      @blocks.each do |b|
-        matches = result.select{|n| b.links.include?(n.name)}
-        if matches.present?
-          if b.is_prefix?
-            result.insert(result.index(matches.first), b)
-          elsif b.is_suffix?
-            result.insert(result.index(matches.last) + 1, b)
+    # By parsing each node's hash, create a sentence
+    def build_sentence_from_hash(nodes)
+      result = []
+      nodes.each do |node|
+        # This node does not appear in params
+        if node[:current_value].nil?
+          if node[:always_use]
+            result << node[:sentence]
           end
+        else
+          result << node[:sentence]
         end
       end
       result
     end
 
-    def build_sentence_from_params(params)
-      result = []
-
-      combine_nodes.each do |node|
-        if node.is_block?
-          if (node.links & params.keys).size == 0
-            result << node.structure(false)
-          else
-            result << node.structure(true)
-          end
-        elsif params.has_key?(node.name)
-          result << node.structure(true)
-        else
-          result << node.structure(false)
-        end
+    # Helper method
+    def to_boolean(value)
+      if value == 'true'
+        true
+      elsif value == 'false'
+        false
+      elsif value.is_a?(TrueClass) || value.is_a?(FalseClass)
+        value
+      else
+        false
       end
-      result.select(&:present?)
     end
   end
 end

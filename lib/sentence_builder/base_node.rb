@@ -1,21 +1,28 @@
-require 'sentence_builder/block_node'
-
 module SentenceBuilder
   class BaseNode
     attr_reader :name, :default
 
     def initialize(name, options = {})
       @name = name.to_sym
-
-      @default = options[:default] || ''
+      @options = options
+      @default = @options[:default] || nil
     end
 
-    def is_block?
-      self.is_a?(BlockNode) ? true : false
+    def prefix
+      @options[:prefix] || ''
     end
 
-    def structure
-      @prefix + "%{#{@name}}" + @suffix
+    def prefix=(new_prefix)
+      @options[:prefix] = new_prefix || ''
     end
+
+    def suffix
+      @options[:suffix] || ''
+    end
+
+    def suffix=(new_suffix)
+      @options[:suffix] = new_suffix || ''
+    end
+
   end
 end
