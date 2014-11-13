@@ -1,6 +1,7 @@
 # SentenceBuilder
 
 [![Code Climate](https://codeclimate.com/github/eminbugrasaral/sentence-builder/badges/gpa.svg)](https://codeclimate.com/github/eminbugrasaral/sentence-builder)
+[![Stories in Ready](https://badge.waffle.io/eminbugrasaral/sentence-builder.png?label=ready&title=Ready)](https://waffle.io/eminbugrasaral/sentence-builder)
 
 This gem is still under development. The documentation and tests will be ready soon.
 
