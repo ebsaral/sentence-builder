@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    sentence_builder (0.0.1)
+    sentence_builder (0.0.2)
 
 GEM
   remote: https://rubygems.org/
