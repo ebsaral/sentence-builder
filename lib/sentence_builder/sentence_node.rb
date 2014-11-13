@@ -1,5 +1,6 @@
 require 'active_support/core_ext/string'
 require 'sentence_builder/base_node'
+require 'sentence_builder/helper'
 
 module SentenceBuilder
 
@@ -15,11 +16,11 @@ module SentenceBuilder
     end
 
     def always_use
-      @options[:always_use].is_a?(Boolean) ? @options[:always_use] : false
+      SentenceBuilder::Helper.is_boolean(@options[:always_use]) ? @options[:always_use] : true
     end
 
     def always_use?(new_value)
-      @options[:always_use] = new_value.is_a?(Boolean) ? new_value : false
+      @options[:always_use] = SentenceBuilder::Helper.to_boolean(new_value)
     end
 
     def display_name

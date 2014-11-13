@@ -1,5 +1,6 @@
 require 'active_support/core_ext/string'
 require 'sentence_builder/sentence_node'
+require 'sentence_builder/helper'
 
 module SentenceBuilder
   class Builder
@@ -8,7 +9,7 @@ module SentenceBuilder
       @nodes = nodes.select{|b| b.is_a?(SentenceNode)}
     end
 
-    # Return all nodes in order as an hash
+    # Return all nodes in order as an hashalways_use
     def get_hash(params = {}, sorted = true)
       get_nodes(sorted).map{|n| n.to_hash(params[n.name])}
     end
@@ -32,7 +33,7 @@ module SentenceBuilder
 
     # Return nodes by sorting option
     def get_nodes(sorted = true)
-      to_boolean(sorted) ? @nodes.sort_by{|i| i.sort_by_value} : @nodes
+      SentenceBuilder::Helper.to_boolean(sorted) ? @nodes.sort_by{|i| i.sort_by_value} : @nodes
     end
 
     # By parsing each node's hash, create a sentence
@@ -49,19 +50,6 @@ module SentenceBuilder
         end
       end
       result
-    end
-
-    # Helper method
-    def to_boolean(value)
-      if value == 'true'
-        true
-      elsif value == 'false'
-        false
-      elsif value.is_a?(TrueClass) || value.is_a?(FalseClass)
-        value
-      else
-        false
-      end
     end
   end
 end

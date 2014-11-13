@@ -23,12 +23,15 @@ Or install it yourself as:
 Simple example
 
 ```ruby
-node1 = SentenceBuilder::SentenceNode.new(:title, prefix: 'With title ')
-node2 = SentenceBuilder::SentenceNode.new(:year, prefix: 'at ')
+node1 = SentenceBuilder::SentenceNode.new(:title, prefix: 'With title', default: 'LalaLand')
+node2 = SentenceBuilder::SentenceNode.new(:year, prefix: 'at', default: '2013', always_use: false)
 
 builder = SentenceBuilder::Builder.new([node1, node2])
 
-puts builder.get_sentence()
+builder.get_sentence()  # With title LalaLand
+builder.get_sentence({title: 'SentenceLand'})  # With title SentenceLand
+builder.get_sentence({title: 'Emin Land', year: '2016'})  # With title Emin Land at 2016
+
 
 ```
 
