@@ -1,3 +1,6 @@
+require 'sentence_builder/block_node'
+require 'sentence_builder/sentence_node'
+
 module SentenceBuilder
   class Builder
 
@@ -31,6 +34,10 @@ module SentenceBuilder
                       params[k] = v.to_s
                     end
       end
+    end
+
+    def add_node(node)
+      @nodes << node
     end
 
     def get_nodes

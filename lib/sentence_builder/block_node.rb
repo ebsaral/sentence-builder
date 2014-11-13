@@ -5,6 +5,7 @@
 # with this class when we group Node1 and Node 2 then it will not create Sci-fi movies upcoming movies, it will create
 # as  Sci-fi upcoming movies
 
+require 'sentence_builder/base_node'
 
 module SentenceBuilder
 
@@ -12,7 +13,7 @@ module SentenceBuilder
   BLOCK_TYPE_PREFIX = 1
   BLOCK_TYPE_SUFFIX = 2
 
-  class BlockNode < SentenceBuilder::BaseNode
+  class BlockNode < BaseNode
     attr_reader :name, :default, :links
 
     def initialize(type, options = {})

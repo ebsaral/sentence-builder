@@ -1,3 +1,5 @@
+require 'sentence_builder/base_node'
+
 module SentenceBuilder
 
   class SentenceNode < BaseNode

@@ -1,3 +1,5 @@
+require 'sentence_builder/block_node'
+
 module SentenceBuilder
   class BaseNode
     attr_reader :name, :default

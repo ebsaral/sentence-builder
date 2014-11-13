@@ -1,0 +1,17 @@
+PATH
+  remote: .
+  specs:
+    sentence_builder (0.0.1)
+
+GEM
+  remote: https://rubygems.org/
+  specs:
+    rake (10.3.2)
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  bundler (~> 1.7)
+  rake (~> 10.0)
+  sentence_builder!
