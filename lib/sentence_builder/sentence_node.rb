@@ -1,3 +1,4 @@
+require 'active_support/core_ext/string'
 require 'sentence_builder/base_node'
 
 module SentenceBuilder
@@ -37,11 +38,15 @@ module SentenceBuilder
     end
 
     # "my prefix %{#name} is working with my suffix" % {name: 'test'}
-    def structure
+    def structure(without_default=true)
       if @custom_structure.present?
         @custom_structure
       else
-        @prefix + "%{#{@name}}" + @suffix
+        if without_default
+          @prefix + "%{#{@name}}" + @suffix
+        else
+          @prefix + @default + @suffix
+        end
       end
     end
 

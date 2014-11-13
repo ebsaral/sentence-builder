@@ -20,7 +20,17 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+Simple example
+
+```ruby
+node1 = SentenceBuilder::SentenceNode.new(:title, prefix: 'With title ')
+node2 = SentenceBuilder::SentenceNode.new(:year, prefix: 'at ')
+
+builder = SentenceBuilder::Builder.new([node1, node2])
+
+puts builder.get_sentence()
+
+```
 
 ## Contributing
 

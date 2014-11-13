@@ -1,3 +1,4 @@
+require 'active_support/core_ext/string'
 require 'sentence_builder/block_node'
 require 'sentence_builder/sentence_node'
 
@@ -74,9 +75,9 @@ module SentenceBuilder
             result << node.structure(true)
           end
         elsif params.has_key?(node.name)
-          result << node.structure
+          result << node.structure(true)
         else
-          result << node.default
+          result << node.structure(false)
         end
       end
       result.select(&:present?)
