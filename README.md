@@ -1,6 +1,6 @@
 # SentenceBuilder
 
-TODO: Write a gem description
+This gem is still under development. The documentation and tests will be ready soon.
 
 ## Installation
 
