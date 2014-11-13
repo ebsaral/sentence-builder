@@ -45,7 +45,7 @@ module SentenceBuilder
         if without_default
           @prefix + "%{#{@name}}" + @suffix
         else
-          @prefix + @default + @suffix
+          @default.present? ? (@prefix + @default + @suffix) : ''
         end
       end
     end
