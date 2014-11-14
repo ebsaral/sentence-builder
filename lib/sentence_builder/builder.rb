@@ -20,17 +20,6 @@ module SentenceBuilder
     end
 
     private
-    # Combines array values of each element in params hash into a string with given separator
-    def enhance_content(params, separator = ', ')
-      params.each do |k, v|
-        params[k] = if v.is_a?(Array)
-                      v.join(separator)
-                    else
-                      params[k] = v
-                    end
-      end
-    end
-
     # Return nodes by sorting option
     def get_nodes(sorted = true)
       SentenceBuilder::Helper.to_boolean(sorted) ? @nodes.sort_by{|i| i.sort_by_value} : @nodes
