@@ -15,11 +15,21 @@ module SentenceBuilder
       @custom_structure_hash = options[:custom_structure_hash] || {}
     end
 
+    # If this is true and options is a hash with format {name: 123, value: 456, xxx: 789}
+    # Then default option entered as the value in hash gets converted into its name
+    def match_with_options
+      SentenceBuilder::Helper.is_boolean(@options[:match_with_options]) ? @options[:match_with_options] : false
+    end
+
+    def match_with_options=(new_value)
+      @options[:match_with_options] = SentenceBuilder::Helper.to_boolean(new_value)
+    end
+
     def always_use
       SentenceBuilder::Helper.is_boolean(@options[:always_use]) ? @options[:always_use] : true
     end
 
-    def always_use?(new_value)
+    def always_use=(new_value)
       @options[:always_use] = SentenceBuilder::Helper.to_boolean(new_value)
     end
 
@@ -72,9 +82,19 @@ module SentenceBuilder
 
     def structure(value = nil)
       if value.present?
-        add_prefix_and_suffix(value)
+        names = get_option_names(value)
+        if match_with_options and names.present?
+          add_prefix_and_suffix(enhance_content(names))
+        else
+          add_prefix_and_suffix(enhance_content(value))
+        end
       elsif @default.present?
-        add_prefix_and_suffix(@default)
+        names = get_option_names(@default)
+        if match_with_options and names.present?
+          add_prefix_and_suffix(enhance_content(names))
+        else
+          add_prefix_and_suffix(enhance_content(@default))
+        end
       elsif @custom_structure.present? and @custom_structure.is_a?(String)
         @custom_structure % {sb_prefix: prefix,
                              sb_suffix: suffix}.merge(@custom_structure_hash)
@@ -84,8 +104,17 @@ module SentenceBuilder
     end
 
     private
+    def get_option_names(value)
+      options.select{|o| o[:value] == value}.map{|o| o[:name]}.uniq
+    end
+
     def add_prefix_and_suffix(value)
       [prefix, value, suffix].select(&:present?).join(' ')
+    end
+
+    # Combines array into a string with given separator
+    def enhance_content(value, separator = ', ')
+      value.is_a?(Array) ? value.join(separator) : value
     end
   end
 end
