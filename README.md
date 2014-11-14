@@ -46,7 +46,10 @@ Option matching example
 
 ```ruby
 options = [{name: 'Apple', value: 1}, {name: 'Cherry', value: 2}]
-node = SentenceBuilder::SentenceNode.new(:fruit, prefix: "Let's eat", default: 2, options: options)
+node = SentenceBuilder::SentenceNode.new(:fruit,
+                                         default: 2,
+                                         prefix: "Let's eat",
+                                         options: options)
 
 builder = SentenceBuilder::Builder.new([node])
 
