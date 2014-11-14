@@ -55,18 +55,18 @@ builder = SentenceBuilder::Builder.new([node])
 
 # Default was set to 2
 builder.get_sentence  # Let's eat 2
-builder.get_sentence({fruit: 2})  # Let's eat 2
+builder.get_sentence({fruit: 1})  # Let's eat 1
 
-# We may not be able to eat a fruit named 2. Let's do the magic
+# We may not be able to eat a fruit named 2. Let's get sexy:
 node.match_with_options = true
 builder.get_sentence  # Let's eat Cherry
 builder.get_sentence({fruit: 1})  # Let's eat Apple
 
-# Note: If you want match_with_options to work, the structure of hash must be like:
+# Note: If you want match_with_options to work, the structure of options hash be like:
 # {name: 'Display', value: 1}
 # {name: 'Display', value: 1, foo: bar}
 
-# Does not replace it with the options if the value does not exist
+# Note II: Cannot replace the node with the options if the value does not exist :/
 builder.get_sentence({fruit: 'Kiwi'})  # Let's eat Kiwi
 
 ```
