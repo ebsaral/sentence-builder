@@ -42,6 +42,43 @@ builder.get_sentence({title: 'Emin Land', year: '2016'})  # With title Emin Land
 
 ```
 
+Option matching example
+
+```ruby
+options = [{name: 'Apple', value: 1}, {name: 'Cherry', value: 2}]
+node = SentenceBuilder::SentenceNode.new(:fruit, prefix: "Let's eat", default: 2, options: options)
+
+builder = SentenceBuilder::Builder.new([node])
+
+# Default was set to 2
+builder.get_sentence  # Let's eat 2
+builder.get_sentence({fruit: 2})  # Let's eat 2
+
+# We may not be able to eat a fruit named 2. Let's do the magic
+node.match_with_options = true
+builder.get_sentence  # Let's eat Cherry
+builder.get_sentence({fruit: 1})  # Let's eat Apple
+
+# Note: If you want match_with_options to work, the structure of hash must be like:
+# {name: 'Display', value: 1}
+# {name: 'Display', value: 1, foo: bar}
+
+# Does not replace it with the options if the value does not exist
+builder.get_sentence({fruit: 'Kiwi'})  # Let's eat Kiwi
+
+```
+
+## TODOs
+
+- Write a proper & detailed documentation with examples
+- Cover all tests
+- Add parameter protection / validation
+- Add / improve errors within the code structure
+- Add "creating nodes from YAML" feature into the builder for lazy or practical people
+- Create an example app
+- Tell your girlfriend you love her when the time comes
+
+
 ## Contributing
 
 1. Fork it ( https://github.com/eminbugrasaral/sentence-builder/fork )
