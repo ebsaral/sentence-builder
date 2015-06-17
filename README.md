@@ -2,7 +2,7 @@
 
 [![Gem Version](https://badge.fury.io/rb/sentence_builder.svg)](http://badge.fury.io/rb/sentence_builder)
 [![Code Climate](https://codeclimate.com/github/eminbugrasaral/sentence-builder/badges/gpa.svg)](https://codeclimate.com/github/eminbugrasaral/sentence-builder)
-[![Build Status](https://travis-ci.org/eminbugrasaral/sentence-builder.svg?branch=master)](https://travis-ci.org/eminbugrasaral/sentence-builder)
+[![Build Status](https://travis-ci.org/ebsaral/sentence-builder.svg?branch=master)](https://travis-ci.org/ebsaral/sentence-builder)
 [![Stories in Ready](https://badge.waffle.io/eminbugrasaral/sentence-builder.png?label=ready&title=Ready)](https://waffle.io/eminbugrasaral/sentence-builder)
 
 Dynamic sentence (or text) builder helps to create your sentence nodes with many options and then automatically generates your sentence or constructs the hash array of your sentence nodes for any later use.
