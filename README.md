@@ -1,3 +1,4 @@
+[![Stories in Ready](https://badge.waffle.io/eminbugrasaral/sentence-builder.png?label=ready&title=Ready)](https://waffle.io/eminbugrasaral/sentence-builder)
 # SentenceBuilder
 
 [![Gem Version](https://badge.fury.io/rb/sentence_builder.svg)](http://badge.fury.io/rb/sentence_builder)
